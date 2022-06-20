@@ -2,8 +2,8 @@
   "name": "EML analyzer",
   "description": "An application to analyze the EML file",
   "keywords": ["EML"],
-  "website": "https://github.com/ninoseki/eml_analyzer",
-  "repository": "https://github.com/ninoseki/eml_analyzer",
+  "website": "https://github.com/SalonInteractive/eml_analyzer",
+  "repository": "https://github.com/SalonInteractive/eml_analyzer",
   "success_url": "/",
   "stack": "container"
 }

@@ -12,7 +12,7 @@
       </b-navbar-item>
       <b-navbar-item>
         <a
-          href="https://github.com/ninoseki/eml_analyzer"
+          href="https://github.com/SalonInteractive/eml_analyzer"
           target="_blank"
           class="navbar-item"
           >GitHub</a
