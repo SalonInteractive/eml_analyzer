@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from typing import Any, Dict, List
-
+import sys
 import aiospamc
 from async_timeout import timeout
 
@@ -55,15 +55,19 @@ class Parser:
         return [self._parse_detail(line) for line in normalized_line]
 
     def _parse_body(self):
-        lines = [line for line in self.body.splitlines() if line != ""]
-        demiliter_index = 0
-        for index, line in enumerate(lines):
-            if "---" in line:
-                demiliter_index = index + 1
-                break
+        try:
+          lines = [line for line in self.body.splitlines() if line != ""]
+          demiliter_index = 0
+          for index, line in enumerate(lines):
+              if "---- ------------------------" in line:
+                  demiliter_index = index + 1
+                  break
 
-        details = "\n".join(lines[demiliter_index:])
-        self.details = self._parse_details(details)
+          details = "\n".join(lines[demiliter_index:])
+          self.details = self._parse_details(details)
+        except:
+          e = sys.exc_info()[0]
+          print(e)
 
     def parse(self):
         self._parse_headers()
