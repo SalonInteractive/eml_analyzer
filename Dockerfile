@@ -1,5 +1,11 @@
 # build env
-FROM node:16-alpine as build
+FROM python:3.9-slim-buster as build
+
+
+RUN apt-get update
+RUN apt-get -y install curl gnupg make g++
+RUN curl -sL https://deb.nodesource.com/setup_11.x  | bash -
+RUN apt-get -y install nodejs
 
 COPY ./frontend /frontend
 WORKDIR /frontend
@@ -9,7 +15,7 @@ RUN npm install && npm run build && rm -rf node_modules
 FROM python:3.9-slim-buster
 
 RUN apt-get update \
-  && apt-get install -y spamassassin supervisor libmagic-dev  \
+  && apt-get install -y spamassassin supervisor libmagic-dev build-essential \
   && apt-get clean  \
   && rm -rf /var/lib/apt/lists/*
 
