@@ -1,4 +1,5 @@
-from fastapi import APIRouter, File
+from fastapi import APIRouter, File, Request
+from app.core.settings import SI_API_KEY
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 from pydantic import ValidationError
@@ -10,7 +11,11 @@ from app.schemas.response import Response
 router = APIRouter()
 
 
-async def _analyze(file: bytes) -> Response:
+async def _analyze(apiKey: str, file: bytes) -> Response:
+    if apiKey != SI_API_KEY:
+      return JSONResponse(
+            status_code=403, content=jsonable_encoder({"error": "forbidden"})
+        )
     try:
         payload = FilePayload(file=file)
     except ValidationError as exc:
@@ -29,8 +34,9 @@ async def _analyze(file: bytes) -> Response:
     description="Analyze an eml and return an analysis result",
     status_code=200,
 )
-async def analyze(payload: Payload) -> Response:
-    return await _analyze(payload.file.encode())
+async def analyze(payload: Payload, request: Request) -> Response:
+    apiKey = request.headers.get("authorization")
+    return await _analyze(apiKey, payload.file.encode())
 
 
 @router.post(
@@ -41,5 +47,6 @@ async def analyze(payload: Payload) -> Response:
     description="Analyze an eml and return an analysis result",
     status_code=200,
 )
-async def analyze_file(file: bytes = File(...)) -> Response:
-    return await _analyze(file)
+async def analyze_file(request: Request, file: bytes = File(...)) -> Response:
+    apiKey = request.headers.get("authorization")
+    return await _analyze(apiKey, file)
