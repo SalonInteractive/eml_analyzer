@@ -12,7 +12,10 @@ services:
       dockerfile: app.Dockerfile
     ports:
       - ${PORT:-8000}:8000
+    volumes:
+      - ./app:/backend/app
     environment:
+      - SI_API_KEY=12345
       - VIRUSTOTAL_API_KEY=${VIRUSTOTAL_API_KEY}
       - URLSCAN_API_KEY=${URLSCAN_API_KEY}
       - INQUEST_API_KEY=${INQUEST_API_KEY}

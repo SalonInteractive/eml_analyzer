@@ -22,7 +22,6 @@ WORKDIR /backend
 
 COPY pyproject.toml poetry.lock /backend/
 COPY gunicorn.conf.py /backend
-COPY app /backend/app
 
 RUN pip3 install poetry && poetry config virtualenvs.create false && poetry install --no-dev
 
