@@ -1,13 +1,9 @@
-FROM python:3.9-slim-buster as build
-
-
-RUN apt-get update
-RUN apt-get -y install curl gnupg make g++
-RUN curl -sL https://deb.nodesource.com/setup_11.x  | bash -
-RUN apt-get -y install nodejs
+# build env
+FROM node:18-buster-slim as build
 
 COPY ./frontend /frontend
 WORKDIR /frontend
+ENV NODE_OPTIONS --openssl-legacy-provider
 RUN npm install && npm run build && rm -rf node_modules
 
 # prod env
@@ -23,7 +19,7 @@ WORKDIR /backend
 COPY pyproject.toml poetry.lock /backend/
 COPY gunicorn.conf.py /backend
 
-RUN pip3 install poetry && poetry config virtualenvs.create false && poetry install --no-dev
+RUN pip install poetry==1.1.15 && poetry config virtualenvs.create false && poetry install --no-dev
 
 COPY --from=build /frontend /backend/frontend
 
