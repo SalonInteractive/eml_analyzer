@@ -35,19 +35,19 @@ COPY circus.ini /etc/circus.ini
 COPY --from=build /frontend /backend/frontend
 
 # Spam assassin Steps
-git clone https://github.com/spamhaus/spamassassin-dqs
-cd spamassassin-dqs/3.4.1+
-sed -i -e "s/your_DQS_key/$SPAMHAUS_DQS_KEY/g" sh.cf
-sed -i -e "s/your_DQS_key/$SPAMHAUS_DQS_KEY/g" sh_hbl.cf
-sed -i -e "s/<config_directory>/\/etc\/mail\/spamassassin/g" sh.pre
+RUN git clone https://github.com/spamhaus/spamassassin-dqs
+RUN cd spamassassin-dqs/3.4.1+
+RUN sed -i -e "s/your_DQS_key/$SPAMHAUS_DQS_KEY/g" sh.cf
+RUN sed -i -e "s/your_DQS_key/$SPAMHAUS_DQS_KEY/g" sh_hbl.cf
+RUN sed -i -e "s/<config_directory>/\/etc\/mail\/spamassassin/g" sh.pre
 
-cp SH.pm /etc/mail/spamassassin
-cp sh.cf /etc/mail/spamassassin
-cp sh_scores.cf /etc/mail/spamassassin
-cp sh.pre /etc/mail/spamassassin
+RUN cp SH.pm /etc/mail/spamassassin
+RUN cp sh.cf /etc/mail/spamassassin
+RUN cp sh_scores.cf /etc/mail/spamassassin
+RUN cp sh.pre /etc/mail/spamassassin
 # Uncomment if HBL (paid) enabled
-# cp sh_hbl.cf /etc/mail/spamassassin
-# cp sh_hbl_scores.cf /etc/mail/spamassassin
+# RUN cp sh_hbl.cf /etc/mail/spamassassin
+# RUN cp sh_hbl_scores.cf /etc/mail/spamassassin
 
 # spamd envs
 ENV SPAMD_MAX_CHILDREN=1 \
