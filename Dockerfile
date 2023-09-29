@@ -44,4 +44,5 @@ EXPOSE $PORT
 # CMD ["circusd", "/etc/circus.ini"]
 
 RUN git clone https://github.com/spamhaus/spamassassin-dqs
+run chmod +x startup.sh
 CMD ["/bin/bash","-c","./startup.sh"]

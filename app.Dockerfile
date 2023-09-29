@@ -29,4 +29,5 @@ ENV PORT 8000
 EXPOSE $PORT
 
 RUN git clone https://github.com/spamhaus/spamassassin-dqs
+RUN chmod +x startup.sh
 CMD ["/bin/bash","-c","./startup.sh"]
