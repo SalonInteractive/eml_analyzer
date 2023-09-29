@@ -18,7 +18,6 @@ WORKDIR /backend
 
 COPY pyproject.toml poetry.lock /backend/
 COPY gunicorn.conf.py /backend
-COPY spamhaus-setup.sh /backend
 
 RUN pip install poetry==1.1.15 && poetry config virtualenvs.create false && poetry install --no-dev
 
