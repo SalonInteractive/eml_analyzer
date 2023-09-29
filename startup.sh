@@ -10,5 +10,3 @@ cd spamassassin-dqs/3.4.1+ \
 # Uncomment if HBL (paid) enabled
 # && cp sh_hbl.cf /etc/mail/spamassassin
 # && cp sh_hbl_scores.cf /etc/mail/spamassassin
-
-gunicorn -k uvicorn.workers.UvicornWorker app:app

@@ -30,4 +30,4 @@ EXPOSE $PORT
 
 RUN git clone https://github.com/spamhaus/spamassassin-dqs
 RUN chmod +x startup.sh
-CMD ["/bin/bash","-c","./startup.sh"]
+CMD bash -c "./startup.sh";gunicorn -k uvicorn.workers.UvicornWorker app:app
