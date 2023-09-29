@@ -45,4 +45,5 @@ EXPOSE $PORT
 
 RUN git clone https://github.com/spamhaus/spamassassin-dqs
 RUN chmod +x startup.sh
+RUN rm /bin/sh && ln -s /bin/bash /bin/sh # Workaround for ps:exec
 CMD bash -c "./startup.sh";circusd /etc/circus.ini
