@@ -27,10 +27,8 @@ ENV PORT 8000
 
 EXPOSE $PORT
 
-CMD gunicorn -k uvicorn.workers.UvicornWorker app:app
-
-CMD git clone https://github.com/spamhaus/spamassassin-dqs
-CMD cd spamassassin-dqs/3.4.1+ \
+RUN git clone https://github.com/spamhaus/spamassassin-dqs
+CMD gunicorn -k uvicorn.workers.UvicornWorker app:app;cd spamassassin-dqs/3.4.1+ \
       && sed -i -e "s/your_DQS_key/$SPAMHAUS_DQS_KEY/g" sh.cf \
       && sed -i -e "s/your_DQS_key/$SPAMHAUS_DQS_KEY/g" sh_hbl.cf \
       && sed -i -e "s/<config_directory>/\/etc\/mail\/spamassassin/g" sh.pre \
