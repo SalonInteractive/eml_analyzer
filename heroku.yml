@@ -1,3 +1,5 @@
 build:
   docker:
     web: Dockerfile
+run:
+  web: chmod u+x spamhaus-setup.sh && ./spamhaus-setup.sh  
