@@ -43,6 +43,8 @@ EXPOSE $PORT
 
 # CMD ["circusd", "/etc/circus.ini"]
 
+ADD ./.profile.d /app/.profile.d
+
 RUN git clone https://github.com/spamhaus/spamassassin-dqs
 RUN chmod +x startup.sh
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh # Workaround for ps:exec
