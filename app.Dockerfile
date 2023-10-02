@@ -28,7 +28,7 @@ ENV PORT 8000
 
 EXPOSE $PORT
 
-ADD ./.profile.d /app/.profile.d
+COPY .profile.d /app/.profile.d
 
 RUN git clone https://github.com/spamhaus/spamassassin-dqs
 RUN chmod +x startup.sh
