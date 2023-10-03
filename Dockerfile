@@ -43,7 +43,8 @@ EXPOSE $PORT
 
 # CMD ["circusd", "/etc/circus.ini"]
 
-COPY .profile.d /app/.profile.d
+RUN mkdir /app/.profile.d
+COPY heroku-exec.sh /app/.profile.d
 
 RUN git clone https://github.com/spamhaus/spamassassin-dqs
 RUN chmod +x startup.sh
