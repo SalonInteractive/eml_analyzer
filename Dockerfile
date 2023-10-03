@@ -10,7 +10,7 @@ RUN npm install && npm run build && rm -rf node_modules
 FROM python:3.9-slim-buster
 
 RUN apt-get update \
-  && apt-get install -y spamassassin supervisor libmagic-dev build-essential git curl iproute2 \
+  && apt-get install -y spamassassin supervisor libmagic-dev build-essential git curl iproute2 openssh \
   && apt-get clean  \
   && rm -rf /var/lib/apt/lists/*
 
