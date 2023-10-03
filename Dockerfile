@@ -7,7 +7,7 @@ ENV NODE_OPTIONS --openssl-legacy-provider
 RUN npm install && npm run build && rm -rf node_modules
 
 # prod env
-FROM python:3.9-slim-buster
+FROM python:3.9-slim-bookworm
 
 RUN apt-get update \
   && apt-get install -y spamassassin supervisor libmagic-dev build-essential git curl iproute2 openssh-client openssh-server procps \
