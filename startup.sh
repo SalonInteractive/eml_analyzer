@@ -11,4 +11,4 @@ cd spamassassin-dqs/4.0.0+ \
 # 3.0 commands
 #      && cp sh.pre /etc/mail/spamassassin
 #      && cp SH.pm /etc/mail/spamassassin \
-      && sed -i -e "s/<config_directory>/\/etc\/mail\/spamassassin/g" sh.pre \
+#      && sed -i -e "s/<config_directory>/\/etc\/mail\/spamassassin/g" sh.pre \
