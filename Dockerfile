@@ -1,5 +1,5 @@
 # build env
-FROM node:18-buster-slim as build
+FROM node:18-bookworm-slim as build
 
 COPY ./frontend /frontend
 WORKDIR /frontend
