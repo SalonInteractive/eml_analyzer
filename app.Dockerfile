@@ -10,7 +10,7 @@ RUN npm install && npm run build && rm -rf node_modules
 FROM python:3.9-slim-bookworm
 
 RUN apt-get update \
-	&& apt-get install -y libmagic-dev build-essential git curl iproute2 openssh-client openssh-server procps dnsutils \
+	&& apt-get install -y libmagic-dev build-essential git curl iproute2 openssh-client openssh-server procps \
 	&& apt-get clean  \
 	&& rm -rf /var/lib/apt/lists/*
 
