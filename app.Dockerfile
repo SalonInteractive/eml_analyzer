@@ -1,5 +1,5 @@
 # build env
-FROM node:18-bookwoom-slim as build
+FROM node:22-bookwoom-slim as build
 
 COPY ./frontend /frontend
 WORKDIR /frontend
